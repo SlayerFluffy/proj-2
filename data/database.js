@@ -20,34 +20,15 @@ const initDb = (callback) => {
         });
 };
 
-const getDatabase = () => {
+const getDb = () => {
     if (!database) {
         throw Error("Database not initialized");
     }
+
     return database;
-};
-
-const getDbByName = (dbName) => {
-    if (!database) {
-        throw Error("Database not initialized");
-    }
-
-    return database.db(dbName);
-};
-
-const getUsersDb = () => {
-    const usersDbName = process.env.MONGODB_DB_USERS || 'Users';
-    return getDbByName(usersDbName);
-};
-
-const getCharactersDb = () => {
-    const charactersDbName = process.env.MONGODB_DB_CHARACTERS || 'Characters';
-    return getDbByName(charactersDbName);
 };
 
 module.exports = {
     initDb,
-    getDatabase,
-    getUsersDb,
-    getCharactersDb
+    getDb
 };

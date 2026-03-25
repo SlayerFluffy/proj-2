@@ -4,7 +4,8 @@ const ObjectId = require("mongodb").ObjectId;
 const getAllCharacters = async (req, res) => {
   // #swagger.tags = ['Characters']
   const result = await mongodb
-    .getCharactersDb()
+    .getDb()
+    .db()
     .collection("characters")
     .find();
   result
@@ -29,7 +30,8 @@ const getCharacterById = async (req, res) => {
   }
   const characterId = new ObjectId(req.params.id);
   const result = await mongodb
-    .getCharactersDb()
+    .getDb()
+    .db()
     .collection("characters")
     .find({ _id: characterId });
   result.toArray().then((characters) => {
@@ -101,7 +103,8 @@ const createCharacter = async (req, res) => {
     cha: req.body.cha,
   };
   const response = await mongodb
-    .getCharactersDb()
+    .getDb()
+    .db()
     .collection("characters")
     .insertOne(newCharacter);
   res.setHeader("Content-Type", "application/json");
@@ -183,7 +186,8 @@ const updateCharacter = async (req, res) => {
     cha: req.body.cha,
   };
   const response = await mongodb
-    .getCharactersDb()
+    .getDb()
+    .db()
     .collection("characters")
     .replaceOne({ _id: characterId }, updatedCharacter);
   res.setHeader("Content-Type", "application/json");
@@ -205,7 +209,8 @@ const deleteCharacter = async (req, res) => {
   }
   const characterId = new ObjectId(req.params.id);
   const response = await mongodb
-    .getCharactersDb()
+    .getDb()
+    .db()
     .collection("characters")
     .deleteOne({ _id: characterId });
   res.setHeader("Content-Type", "application/json");

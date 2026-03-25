@@ -5,7 +5,8 @@ const bcrypt = require("bcrypt");
 const getAllUsers = async (req, res) => {
   // #swagger.tags = ['Users']
   const result = await mongodb
-    .getUsersDb()
+    .getDb()
+    .db()
     .collection("users")
     .find({}, { projection: { password: 0 } });
   result
@@ -29,7 +30,8 @@ const getUserById = async (req, res) => {
   }
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
-    .getUsersDb()
+    .getDb()
+    .db()
     .collection("users")
     .find({ _id: userId }, { projection: { password: 0 } });
   result.toArray().then((users) => {
@@ -65,7 +67,8 @@ const createUser = async (req, res) => {
     password: hashedPassword,
   };
   const response = await mongodb
-    .getUsersDb()
+    .getDb()
+    .db()
     .collection("users")
     .insertOne(newUser);
   res.setHeader("Content-Type", "application/json");
@@ -114,7 +117,8 @@ const updateUser = async (req, res) => {
     password: hashedPassword,
   };
   const response = await mongodb
-    .getUsersDb()
+    .getDb()
+    .db()
     .collection("users")
     .replaceOne({ _id: userId }, updatedUser);
   res.setHeader("Content-Type", "application/json");
@@ -139,7 +143,8 @@ const deleteUser = async (req, res) => {
   }
   const userId = new ObjectId(req.params.id);
   const response = await mongodb
-    .getUsersDb()
+    .getDb()
+    .db()
     .collection("users")
     .deleteOne({ _id: userId });
   res.setHeader("Content-Type", "application/json");
