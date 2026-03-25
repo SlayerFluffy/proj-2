@@ -1,12 +1,12 @@
 // LOCALHOST
 ### Get all users
-GET http://localhost:3000/contacts
+GET https://localhost:3000/contacts
 
 ### Get a single user
-GET http://localhost:3000/contacts/69b34bb55bdec5a669ca0f7c
+GET https://localhost:3000/contacts/69b34bb55bdec5a669ca0f7c
 
 ### Create a new user
-POST http://localhost:3000/contacts HTTP/1.1
+POST https://localhost:3000/contacts HTTP/1.1
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 
 ### Update a user
-PUT http://localhost:3000/contacts/69b632fcaf2a1dfa3a90fbf9 HTTP/1.1
+PUT https://localhost:3000/contacts/69b632fcaf2a1dfa3a90fbf9 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -31,4 +31,4 @@ Content-Type: application/json
 }
 
 ### Delete a user
-DELETE http://localhost:3000/contacts/69b63259af2a1dfa3a90fbf8 HTTP/1.1
+DELETE https://localhost:3000/contacts/69b63259af2a1dfa3a90fbf8 HTTP/1.1
