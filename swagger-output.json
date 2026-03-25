@@ -5,7 +5,7 @@
     "description": "API for managing DnD Characters",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://proj-2-mmd8.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",
