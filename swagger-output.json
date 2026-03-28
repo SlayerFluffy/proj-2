@@ -8,7 +8,6 @@
   "host": "proj-2-mmd8.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
