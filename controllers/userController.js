@@ -42,18 +42,6 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   // #swagger.tags = ['Users']
-  /*
-    #swagger.parameters['body'] = {
-      in: 'body',
-      required: true,
-      schema: {
-        $firstName: 'Drew',
-        $lastName: 'Jezek',
-        $email: 'drew@example.com',
-        $password: 'StrongPassword123'
-      }
-    }
-  */
   if (!req.body) {
     return res.status(400).json({ message: "Request body is required." });
   }
@@ -88,18 +76,6 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   // #swagger.tags = ['Users']
-  /*
-    #swagger.parameters['body'] = {
-      in: 'body',
-      required: true,
-      schema: {
-        $firstName: 'Drew',
-        $lastName: 'Jezek',
-        $email: 'drew@example.com',
-        $password: 'StrongPassword123'
-      }
-    }
-  */
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: "Invalid user ID." });
   }

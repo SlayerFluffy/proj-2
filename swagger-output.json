@@ -8,6 +8,7 @@
   "host": "proj-2-mmd8.onrender.com",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -24,6 +25,26 @@
         }
       }
     },
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api-docs": {
       "get": {
         "description": "",
@@ -36,29 +57,25 @@
     },
     "/characters/": {
       "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
         "tags": [
           "Characters"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        ]
       },
       "post": {
+        "description": "",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
         "tags": [
           "Characters"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
         ],
         "parameters": [
           {
@@ -67,100 +84,6 @@
             "required": true,
             "schema": {
               "type": "object",
-              "properties": {
-                "charName": {
-                  "type": "string",
-                  "example": "Arannis"
-                },
-                "charRace": {
-                  "type": "string",
-                  "example": "Elf"
-                },
-                "charClass": {
-                  "type": "string",
-                  "example": "Ranger"
-                },
-                "charLevel": {
-                  "type": "number",
-                  "example": 5
-                },
-                "charAlignment": {
-                  "type": "string",
-                  "example": "Neutral Good"
-                },
-                "charBackground": {
-                  "type": "string",
-                  "example": "Outlander"
-                },
-                "charAge": {
-                  "type": "number",
-                  "example": 120
-                },
-                "charHeight": {
-                  "type": "number",
-                  "example": 72
-                },
-                "charWeight": {
-                  "type": "number",
-                  "example": 160
-                },
-                "charEyes": {
-                  "type": "string",
-                  "example": "Green"
-                },
-                "charSkin": {
-                  "type": "string",
-                  "example": "Fair"
-                },
-                "charBonds": {
-                  "type": "string",
-                  "example": "Protect my homeland"
-                },
-                "charFlaws": {
-                  "type": "string",
-                  "example": "Too trusting"
-                },
-                "charIdeals": {
-                  "type": "string",
-                  "example": "Freedom"
-                },
-                "charPersonalityTraits": {
-                  "type": "string",
-                  "example": "Calm under pressure"
-                },
-                "hp": {
-                  "type": "number",
-                  "example": 42
-                },
-                "ac": {
-                  "type": "number",
-                  "example": 16
-                },
-                "str": {
-                  "type": "number",
-                  "example": 14
-                },
-                "dex": {
-                  "type": "number",
-                  "example": 17
-                },
-                "con": {
-                  "type": "number",
-                  "example": 13
-                },
-                "int": {
-                  "type": "number",
-                  "example": 12
-                },
-                "wis": {
-                  "type": "number",
-                  "example": 15
-                },
-                "cha": {
-                  "type": "number",
-                  "example": 10
-                }
-              },
               "required": [
                 "charName",
                 "charRace",
@@ -176,35 +99,197 @@
                 "int",
                 "wis",
                 "cha"
-              ]
+              ],
+              "properties": {
+                "charName": {
+                  "type": "string",
+                  "example": "Arannis",
+                  "default": "Arannis"
+                },
+                "charRace": {
+                  "type": "string",
+                  "example": "Elf",
+                  "default": "Elf"
+                },
+                "charClass": {
+                  "type": "string",
+                  "example": "Ranger",
+                  "default": "Ranger"
+                },
+                "charLevel": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 5,
+                  "default": 5
+                },
+                "charAlignment": {
+                  "type": "string",
+                  "example": "Neutral Good",
+                  "default": "Neutral Good"
+                },
+                "charBackground": {
+                  "type": "string",
+                  "example": "Outlander",
+                  "default": "Outlander"
+                },
+                "charAge": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 120,
+                  "default": 120
+                },
+                "charHeight": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 72,
+                  "default": 72
+                },
+                "charWeight": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 160,
+                  "default": 160
+                },
+                "charEyes": {
+                  "type": "string",
+                  "example": "Green",
+                  "default": "Green"
+                },
+                "charSkin": {
+                  "type": "string",
+                  "example": "Fair",
+                  "default": "Fair"
+                },
+                "charBonds": {
+                  "type": "string",
+                  "example": "Protect my homeland",
+                  "default": "Protect my homeland"
+                },
+                "charFlaws": {
+                  "type": "string",
+                  "example": "Too trusting",
+                  "default": "Too trusting"
+                },
+                "charIdeals": {
+                  "type": "string",
+                  "example": "Freedom",
+                  "default": "Freedom"
+                },
+                "charPersonalityTraits": {
+                  "type": "string",
+                  "example": "Calm under pressure",
+                  "default": "Calm under pressure"
+                },
+                "hp": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 42,
+                  "default": 42
+                },
+                "ac": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 16,
+                  "default": 16
+                },
+                "str": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 14,
+                  "default": 14
+                },
+                "dex": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 17,
+                  "default": 17
+                },
+                "con": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 13,
+                  "default": 13
+                },
+                "int": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 12,
+                  "default": 12
+                },
+                "wis": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 15,
+                  "default": 15
+                },
+                "cha": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 10,
+                  "default": 10
+                }
+              },
+              "example": {
+                "charName": "Arannis",
+                "charRace": "Elf",
+                "charClass": "Ranger",
+                "charLevel": 5,
+                "charAlignment": "Neutral Good",
+                "charBackground": "Outlander",
+                "charAge": 120,
+                "charHeight": 72,
+                "charWeight": 160,
+                "charEyes": "Green",
+                "charSkin": "Fair",
+                "charBonds": "Protect my homeland",
+                "charFlaws": "Too trusting",
+                "charIdeals": "Freedom",
+                "charPersonalityTraits": "Calm under pressure",
+                "hp": 42,
+                "ac": 16,
+                "str": 14,
+                "dex": 17,
+                "con": 13,
+                "int": 12,
+                "wis": 15,
+                "cha": 10
+              }
+            },
+            "x-example": {
+              "charName": "Arannis",
+              "charRace": "Elf",
+              "charClass": "Ranger",
+              "charLevel": 5,
+              "charAlignment": "Neutral Good",
+              "charBackground": "Outlander",
+              "charAge": 120,
+              "charHeight": 72,
+              "charWeight": 160,
+              "charEyes": "Green",
+              "charSkin": "Fair",
+              "charBonds": "Protect my homeland",
+              "charFlaws": "Too trusting",
+              "charIdeals": "Freedom",
+              "charPersonalityTraits": "Calm under pressure",
+              "hp": 42,
+              "ac": 16,
+              "str": 14,
+              "dex": 17,
+              "con": 13,
+              "int": 12,
+              "wis": 15,
+              "cha": 10
             }
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/characters/{id}": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -214,22 +299,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
         "tags": [
           "Characters"
-        ],
+        ]
+      },
+      "put": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -243,100 +322,6 @@
             "required": true,
             "schema": {
               "type": "object",
-              "properties": {
-                "charName": {
-                  "type": "string",
-                  "example": "Arannis"
-                },
-                "charRace": {
-                  "type": "string",
-                  "example": "Elf"
-                },
-                "charClass": {
-                  "type": "string",
-                  "example": "Ranger"
-                },
-                "charLevel": {
-                  "type": "number",
-                  "example": 5
-                },
-                "charAlignment": {
-                  "type": "string",
-                  "example": "Neutral Good"
-                },
-                "charBackground": {
-                  "type": "string",
-                  "example": "Outlander"
-                },
-                "charAge": {
-                  "type": "number",
-                  "example": 120
-                },
-                "charHeight": {
-                  "type": "number",
-                  "example": 72
-                },
-                "charWeight": {
-                  "type": "number",
-                  "example": 160
-                },
-                "charEyes": {
-                  "type": "string",
-                  "example": "Green"
-                },
-                "charSkin": {
-                  "type": "string",
-                  "example": "Fair"
-                },
-                "charBonds": {
-                  "type": "string",
-                  "example": "Protect my homeland"
-                },
-                "charFlaws": {
-                  "type": "string",
-                  "example": "Too trusting"
-                },
-                "charIdeals": {
-                  "type": "string",
-                  "example": "Freedom"
-                },
-                "charPersonalityTraits": {
-                  "type": "string",
-                  "example": "Calm under pressure"
-                },
-                "hp": {
-                  "type": "number",
-                  "example": 42
-                },
-                "ac": {
-                  "type": "number",
-                  "example": 16
-                },
-                "str": {
-                  "type": "number",
-                  "example": 14
-                },
-                "dex": {
-                  "type": "number",
-                  "example": 17
-                },
-                "con": {
-                  "type": "number",
-                  "example": 13
-                },
-                "int": {
-                  "type": "number",
-                  "example": 12
-                },
-                "wis": {
-                  "type": "number",
-                  "example": 15
-                },
-                "cha": {
-                  "type": "number",
-                  "example": 10
-                }
-              },
               "required": [
                 "charName",
                 "charRace",
@@ -352,33 +337,203 @@
                 "int",
                 "wis",
                 "cha"
-              ]
+              ],
+              "properties": {
+                "charName": {
+                  "type": "string",
+                  "example": "Arannis",
+                  "default": "Arannis"
+                },
+                "charRace": {
+                  "type": "string",
+                  "example": "Elf",
+                  "default": "Elf"
+                },
+                "charClass": {
+                  "type": "string",
+                  "example": "Ranger",
+                  "default": "Ranger"
+                },
+                "charLevel": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 5,
+                  "default": 5
+                },
+                "charAlignment": {
+                  "type": "string",
+                  "example": "Neutral Good",
+                  "default": "Neutral Good"
+                },
+                "charBackground": {
+                  "type": "string",
+                  "example": "Outlander",
+                  "default": "Outlander"
+                },
+                "charAge": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 120,
+                  "default": 120
+                },
+                "charHeight": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 72,
+                  "default": 72
+                },
+                "charWeight": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 160,
+                  "default": 160
+                },
+                "charEyes": {
+                  "type": "string",
+                  "example": "Green",
+                  "default": "Green"
+                },
+                "charSkin": {
+                  "type": "string",
+                  "example": "Fair",
+                  "default": "Fair"
+                },
+                "charBonds": {
+                  "type": "string",
+                  "example": "Protect my homeland",
+                  "default": "Protect my homeland"
+                },
+                "charFlaws": {
+                  "type": "string",
+                  "example": "Too trusting",
+                  "default": "Too trusting"
+                },
+                "charIdeals": {
+                  "type": "string",
+                  "example": "Freedom",
+                  "default": "Freedom"
+                },
+                "charPersonalityTraits": {
+                  "type": "string",
+                  "example": "Calm under pressure",
+                  "default": "Calm under pressure"
+                },
+                "hp": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 42,
+                  "default": 42
+                },
+                "ac": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 16,
+                  "default": 16
+                },
+                "str": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 14,
+                  "default": 14
+                },
+                "dex": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 17,
+                  "default": 17
+                },
+                "con": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 13,
+                  "default": 13
+                },
+                "int": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 12,
+                  "default": 12
+                },
+                "wis": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 15,
+                  "default": 15
+                },
+                "cha": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 10,
+                  "default": 10
+                }
+              },
+              "example": {
+                "charName": "Arannis",
+                "charRace": "Elf",
+                "charClass": "Ranger",
+                "charLevel": 5,
+                "charAlignment": "Neutral Good",
+                "charBackground": "Outlander",
+                "charAge": 120,
+                "charHeight": 72,
+                "charWeight": 160,
+                "charEyes": "Green",
+                "charSkin": "Fair",
+                "charBonds": "Protect my homeland",
+                "charFlaws": "Too trusting",
+                "charIdeals": "Freedom",
+                "charPersonalityTraits": "Calm under pressure",
+                "hp": 42,
+                "ac": 16,
+                "str": 14,
+                "dex": 17,
+                "con": 13,
+                "int": 12,
+                "wis": 15,
+                "cha": 10
+              }
+            },
+            "x-example": {
+              "charName": "Arannis",
+              "charRace": "Elf",
+              "charClass": "Ranger",
+              "charLevel": 5,
+              "charAlignment": "Neutral Good",
+              "charBackground": "Outlander",
+              "charAge": 120,
+              "charHeight": 72,
+              "charWeight": 160,
+              "charEyes": "Green",
+              "charSkin": "Fair",
+              "charBonds": "Protect my homeland",
+              "charFlaws": "Too trusting",
+              "charIdeals": "Freedom",
+              "charPersonalityTraits": "Calm under pressure",
+              "hp": 42,
+              "ac": 16,
+              "str": 14,
+              "dex": 17,
+              "con": 13,
+              "int": 12,
+              "wis": 15,
+              "cha": 10
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
-        }
-      },
-      "delete": {
+        },
         "tags": [
           "Characters"
         ],
-        "description": "",
-        "produces": [
+        "consumes": [
           "application/json"
-        ],
+        ]
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -388,43 +543,36 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "tags": [
+          "Characters"
+        ]
       }
     },
     "/users/": {
       "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
         "tags": [
           "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        ]
       },
       "post": {
+        "description": "",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
         "tags": [
           "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
         ],
         "parameters": [
           {
@@ -433,58 +581,57 @@
             "required": true,
             "schema": {
               "type": "object",
-              "properties": {
-                "firstName": {
-                  "type": "string",
-                  "example": "Drew"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "Jezek"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "drew@example.com"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "StrongPassword123"
-                }
-              },
               "required": [
                 "firstName",
                 "lastName",
                 "email",
                 "password"
-              ]
+              ],
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Drew",
+                  "default": "Drew"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Jezek",
+                  "default": "Jezek"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "drew@example.com",
+                  "default": "drew@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "StrongPassword123",
+                  "default": "StrongPassword123"
+                }
+              },
+              "example": {
+                "firstName": "Drew",
+                "lastName": "Jezek",
+                "email": "drew@example.com",
+                "password": "StrongPassword123"
+              }
+            },
+            "x-example": {
+              "firstName": "Drew",
+              "lastName": "Jezek",
+              "email": "drew@example.com",
+              "password": "StrongPassword123"
             }
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -494,22 +641,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
         "tags": [
           "Users"
-        ],
+        ]
+      },
+      "put": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -523,56 +664,63 @@
             "required": true,
             "schema": {
               "type": "object",
-              "properties": {
-                "firstName": {
-                  "type": "string",
-                  "example": "Drew"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "Jezek"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "drew@example.com"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "StrongPassword123"
-                }
-              },
               "required": [
                 "firstName",
                 "lastName",
                 "email",
                 "password"
-              ]
+              ],
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Drew",
+                  "default": "Drew"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Jezek",
+                  "default": "Jezek"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "drew@example.com",
+                  "default": "drew@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "StrongPassword123",
+                  "default": "StrongPassword123"
+                }
+              },
+              "example": {
+                "firstName": "Drew",
+                "lastName": "Jezek",
+                "email": "drew@example.com",
+                "password": "StrongPassword123"
+              }
+            },
+            "x-example": {
+              "firstName": "Drew",
+              "lastName": "Jezek",
+              "email": "drew@example.com",
+              "password": "StrongPassword123"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
-        }
-      },
-      "delete": {
+        },
         "tags": [
           "Users"
         ],
-        "description": "",
-        "produces": [
+        "consumes": [
           "application/json"
-        ],
+        ]
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -582,16 +730,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "tags": [
+          "Users"
+        ]
       }
     }
   }

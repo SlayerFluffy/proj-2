@@ -3,11 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 const getAllCharacters = async (req, res) => {
   // #swagger.tags = ['Characters']
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection("characters")
-    .find();
+  const result = await mongodb.getDb().db().collection("characters").find();
   result
     .toArray((err, lists) => {
       if (err) {
@@ -42,37 +38,6 @@ const getCharacterById = async (req, res) => {
 
 const createCharacter = async (req, res) => {
   // #swagger.tags = ['Characters']
-  /*
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-          $charName: 'Arannis',
-          $charRace: 'Elf',
-          $charClass: 'Ranger',
-          $charLevel: 5,
-          $charAlignment: 'Neutral Good',
-          $charBackground: 'Outlander',
-          charAge: 120,
-          charHeight: 72,
-          charWeight: 160,
-          charEyes: 'Green',
-          charSkin: 'Fair',
-          charBonds: 'Protect my homeland',
-          charFlaws: 'Too trusting',
-          charIdeals: 'Freedom',
-          charPersonalityTraits: 'Calm under pressure',
-          $hp: 42,
-          $ac: 16,
-          $str: 14,
-          $dex: 17,
-          $con: 13,
-          $int: 12,
-          $wis: 15,
-          $cha: 10
-                }
-            }
-        */
   if (!req.body) {
     return res.status(400).json({ message: "Request body is required." });
   }
@@ -121,37 +86,6 @@ const createCharacter = async (req, res) => {
 
 const updateCharacter = async (req, res) => {
   // #swagger.tags = ['Characters']
-  /*
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-          $charName: 'Arannis',
-          $charRace: 'Elf',
-          $charClass: 'Ranger',
-          $charLevel: 5,
-          $charAlignment: 'Neutral Good',
-          $charBackground: 'Outlander',
-          charAge: 120,
-          charHeight: 72,
-          charWeight: 160,
-          charEyes: 'Green',
-          charSkin: 'Fair',
-          charBonds: 'Protect my homeland',
-          charFlaws: 'Too trusting',
-          charIdeals: 'Freedom',
-          charPersonalityTraits: 'Calm under pressure',
-          $hp: 42,
-          $ac: 16,
-          $str: 14,
-          $dex: 17,
-          $con: 13,
-          $int: 12,
-          $wis: 15,
-          $cha: 10
-                }
-            }
-        */
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: "Invalid character ID." });
   }
