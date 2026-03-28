@@ -3,15 +3,24 @@ const router = express.Router();
 
 const charactersController = require("../controllers/characterController");
 const validate = require("../middleware/validate");
+const { withErrorHandling } = require("../middleware/routeErrorHandler");
 
-router.get("/", charactersController.getAllCharacters);
-router.get("/:id", charactersController.getCharacterById);
-router.post("/", validate.saveCharacter, charactersController.createCharacter);
+router.get("/", withErrorHandling(charactersController.getAllCharacters));
+
+router.get("/:id", withErrorHandling(charactersController.getCharacterById));
+
+router.post(
+  "/",
+  withErrorHandling(validate.saveCharacter),
+  withErrorHandling(charactersController.createCharacter),
+);
+
 router.put(
   "/:id",
-  validate.saveCharacter,
-  charactersController.updateCharacter,
+  withErrorHandling(validate.saveCharacter),
+  withErrorHandling(charactersController.updateCharacter),
 );
-router.delete("/:id", charactersController.deleteCharacter);
+
+router.delete("/:id", withErrorHandling(charactersController.deleteCharacter));
 
 module.exports = router;
